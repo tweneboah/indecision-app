@@ -2,14 +2,45 @@
 import React from "react";
 import ReactDOM from "react-dom"
 
-//Create react component
-const App = ()=>{
-    return <div>Hi there bhg</div>
+
+//Template 1
+let template = (
+    <div>
+      <h1>Indecision App</h1>
+    </div>
+);
+
+
+//Passing  to render
+const user = {
+    name: "Tweneboah",
+    age: 29,
+    location: "Ayiem"
+}
+
+//Conditional Rendering
+//1. if statement
+//2.ternary operators
+//3. logical and operator
+
+//if statement
+function getLocation(location){
+    if(location) {
+        return location;
+    }else {
+        return "Unknown"
+    }
 }
 
 
-//Take react component and show it to the screen
-ReactDOM.render(
-    <App />, //This refers to the component we created
-    document.querySelector("#root")//Displaying to UI
+//Template 2
+let template2 = (
+    <div>
+    <h1>{user.name}</h1>
+    <p>Age: {user.age}</p>
+    <p>Location: {getLocation(user.location)}</p>
+    </div>
 );
+
+let rootApp = document.getElementById("app");
+ReactDOM.render(template2, rootApp)
