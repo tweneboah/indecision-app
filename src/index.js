@@ -6,11 +6,11 @@ import ReactDOM from "react-dom"
 
 
 
-//Passing  to render
+//Passing object to render
 const user = {
-    name: "Tweneboah",
+    name: "",
     age: 29,
-    location: ""
+    location: "Camp"
 }
 
 const app = {
@@ -36,22 +36,23 @@ let template = (
 
 //if statement
 //Conditional statement base on the user object
+//We can call function expresion in JSX
+
+//Showing paragraph text if there is location and hide it otherwise
 function getLocation(location){
     if(location) {
-        return location;
-    }else {
-        return "Unknown"
+        return <p>Location: {location}</p>
     }
 }
 
 //Template 2
 let template2 = (
     <div>
-    <h1>{user.name}</h1>
-    <p>Age: {user.age}</p>
-    <p>Location: {getLocation(user.location)}</p>
+    <h1>{user.name ? user.name: "Anonymous"}</h1>
+    {user.age >= 18 && <p>Age: {user.age}</p>}
+    {getLocation(user.location)}
     </div>
 );
 
 let rootApp = document.getElementById("app");
-ReactDOM.render(template, rootApp)
+ReactDOM.render(template2, rootApp)
