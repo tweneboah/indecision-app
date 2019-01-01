@@ -3,27 +3,39 @@ import React from "react";
 import ReactDOM from "react-dom"
 
 
-//Template 1
-let template = (
-    <div>
-      <h1>Indecision App</h1>
-    </div>
-);
+
 
 
 //Passing  to render
 const user = {
     name: "Tweneboah",
     age: 29,
-    location: "Ayiem"
+    location: ""
 }
 
+const app = {
+    title: "My Mother",
+    subtitle: "God help my mother for longer life"
+}
+
+//Template 1
+let template = (
+    <div>
+      <h1>{app.title}</h1>
+      <p>{app.subtitle}</p>
+        <ol>
+            <li>Item one</li>
+            <li>Item two</li>
+        </ol>
+    </div>
+);
 //Conditional Rendering
 //1. if statement
 //2.ternary operators
 //3. logical and operator
 
 //if statement
+//Conditional statement base on the user object
 function getLocation(location){
     if(location) {
         return location;
@@ -31,7 +43,6 @@ function getLocation(location){
         return "Unknown"
     }
 }
-
 
 //Template 2
 let template2 = (
@@ -43,4 +54,4 @@ let template2 = (
 );
 
 let rootApp = document.getElementById("app");
-ReactDOM.render(template2, rootApp)
+ReactDOM.render(template, rootApp)
