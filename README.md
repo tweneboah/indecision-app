@@ -9,7 +9,203 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# MY NOTES  1/1/19
+# MY NOTES 
+
+# 03/012019
+
+#CLASSES AND SUBCLASS
+
+```javascript
+//CLASSES
+//It's a blue print
+// We can create instanes of object from class
+// It has a constructor that instantiate functions and properties inside the class
+
+
+class Person {
+    constructor(name = "Anonymous", age =0){
+        this.name = name;
+        this.age = age;
+    }
+
+    getGreetings(){
+        return `Hi. I am ${this.name}!`;
+    }
+
+    getDescription(){
+        return `${this.name} is ${this.age} year(s) old`;
+    }
+}
+
+
+
+//Subclass - SuperClass
+//This is a sub class created based on the parent class
+//This means there unique properties which the parent class don't.
+//Subclass can use the properties of the parent classs
+//The sub class can overide functions and properties of the parent class
+//We use super() to call the functions and properties from the parent class
+//Always call the super() and pass in the argument before creating the unique property 
+
+//Super() refers to the parent class
+
+//We can overide parent class method
+
+
+class Students extends Person {
+    constructor(name, age, major){
+       super(name, age);
+       this.major = major;
+    }
+    hasMajor(){
+        return !!this.major;
+    }
+    getDescription(){
+       let description = super.getDescription();
+        if(this.hasMajor()){
+            // description += `Their major is ${this.major}.`
+        }
+    }
+}
+
+
+const me = new Students("Emmmanuel", 30, "Teaching");
+console.log(me.getDescription());
+
+const other = new Students();
+console.log(other);
+
+```
+
+
+
+
+# 02/01/2019
+# MAP  
+
+1. Map is use to create exact copy of an array where we can manipulate the newly created array.
+
+2. JSX Support Array
+
+3. You can directly display array inside JSX
+
+```javascript
+const numbers = [ 4, 9, 10, 43, 9]
+const multiply = ()=>{
+    numbers.map((number)=>{
+        console.log(`"The Multiplied Number is " ${number * 2}`)
+    })
+};
+
+multiply()
+```
+# Displaying array to the UI using JSX
+
+1. key = number is a property we asign to to have a unique id
+
+```javascript
+const numbers = [2, 9, 20, 10, 6];
+
+const renderApp = ()=>{
+    const template = (
+        <div>
+        {
+            numbers.map((number)=>{
+               return <p key ={number}>The multiplied value is: {number * 2}</p>
+            })
+        }
+        </div>
+    );
+    ReactDOM.render(template, rootApp);
+}
+renderApp()
+```
+
+# DISPLAYING LIST OF DATA TO UI USING A FORM
+```javascript
+
+const app = {
+    title: "My title",
+    subtitle: "My subtitle",
+    options: []
+}
+
+const onFormSubmit = (e)=>{
+e.preventDefault();
+
+//get the value user  type
+const option = e.target.elements.option.value;
+if(option){
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderApp();
+}
+}
+
+const rootApp = document.getElementById("app");
+
+//ARRAY
+const renderApp = ()=>{
+    const template = (
+        <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.title}</p> }
+        <p>{app.options.length > 0 ? "here are your options" : "No options"}</p>
+        <p>{app.options.length}</p>
+        <button onClick ={onRemoveAll}>Remove All</button>
+        <ol>
+            {
+                app.options.map((option)=>{
+                return  <li key ={option}>{option}</li>  
+                })
+            }
+       </ol>
+    <form onSubmit = {onFormSubmit}>
+    <input type ="text" name = "option"/>
+    <button>Add option</button>
+    </form>
+        </div>
+    );
+    ReactDOM.render(template, rootApp);
+}
+renderApp()
+```
+
+# PICKING OPTIONS
+
+```javascript
+const app = {
+    title: "My title",
+    subtitle: "My subtitle",
+    options: []
+}
+
+const renderApp = ()=>{
+    const template = (
+        <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.title}</p> }
+        <p>{app.options.length > 0 ? "here are your options" : "No options"}</p>
+        <p>{app.options.length}</p>
+        <button onClick ={onRemoveAll}>Remove All</button>
+        <button disabled = {app.options.length === 0} onClick ={onMakeDecision}>What Should I do?</button>
+        <ol>
+            {
+                app.options.map((option)=>{
+                return  <li key ={option}>{option}</li>  
+                })
+            }
+       </ol>
+    <form onSubmit = {onFormSubmit}>
+    <input type ="text" name = "option"/>
+    <button>Add option</button>
+    </form>
+        </div>
+    );
+    ReactDOM.render(template, rootApp);
+}
+renderApp()
+```
 
 # FORM INPUT
 ```javascript
