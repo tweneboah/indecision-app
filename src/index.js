@@ -1,58 +1,54 @@
 //Import React and react DOM libraries
 import React from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 
-
-
-
-
-//Passing object to render
-const user = {
-    name: "",
-    age: 29,
-    location: "Camp"
-}
 
 const app = {
-    title: "My Mother",
-    subtitle: "God help my mother for longer life"
+    title: "My title",
+    subtitle: "My subtitle",
+    options: []
 }
 
-//Template 1
-let template = (
-    <div>
-      <h1>{app.title}</h1>
-      <p>{app.subtitle}</p>
+const onFormSubmit = (e)=>{
+e.preventDefault();
+
+//get the value user  type
+const option = e.target.elements.option.value;
+if(option){
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderApp();
+}
+}
+const rootApp = document.getElementById("app");
+
+const onRemoveAll = ()=>{
+    app.options = [];
+    renderApp();
+}
+
+const renderApp = ()=>{
+    const template = (
+        <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.title}</p> }
+        <p>{app.options.length > 0 ? "here are your options" : "No options"}</p>
+        <p>{app.options.length}</p>
+        <button onClick ={onRemoveAll}>Remove All</button>
         <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-    </div>
-);
-//Conditional Rendering
-//1. if statement
-//2.ternary operators
-//3. logical and operator
-
-//if statement
-//Conditional statement base on the user object
-//We can call function expresion in JSX
-
-//Showing paragraph text if there is location and hide it otherwise
-function getLocation(location){
-    if(location) {
-        return <p>Location: {location}</p>
-    }
+        <li>Item one</li>
+        <li>Item two</li>
+    </ol>
+    <form onSubmit = {onFormSubmit}>
+    <input type ="text" name = "option"/>
+    <button>Add option</button>
+    </form>
+        </div>
+    );
+    ReactDOM.render(template, rootApp);
 }
+renderApp()
 
-//Template 2
-let template2 = (
-    <div>
-    <h1>{user.name ? user.name: "Anonymous"}</h1>
-    {user.age >= 18 && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
-    </div>
-);
 
-let rootApp = document.getElementById("app");
-ReactDOM.render(template2, rootApp)
+
+

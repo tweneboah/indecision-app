@@ -9,7 +9,124 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# MY NOTES
+# MY NOTES  1/1/19
+
+# FORM INPUT
+```javascript
+
+const app = {
+    title: "My title",
+    subtitle: "My subtitle",
+    options: []
+}
+
+const onFormSubmit = (e)=>{
+e.preventDefault();
+
+//get the value user  type
+const option = e.target.elements.option.value;
+if(option){
+    app.options.push(option);
+    e.target.elements.option.value = "";
+    renderApp(); //Refresh my data for update
+}
+}
+const rootApp = document.getElementById("app");
+
+const onRemoveAll = ()=>{
+    app.options = [];
+    renderApp();
+}
+
+const renderApp = ()=>{
+    const template = (
+        <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.title}</p> }
+        <p>{app.options.length > 0 ? "here are your options" : "No options"}</p>
+        <p>{app.options.length}</p>
+        <button onClick ={onRemoveAll}>Remove All</button>
+        <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+    </ol>
+    <form onSubmit = {onFormSubmit}>
+    <input type ="text" name = "option"/>
+    <button>Add option</button>
+    </form>
+        </div>
+    );
+    ReactDOM.render(template, rootApp);
+}
+renderApp()
+```
+
+
+
+# DATA BINDING - RE-RENDERING
+```javascript
+let count = 0;
+const addOne = ()=>{
+    //count = count + 1;
+    count++
+    renderCounterApp();
+};
+
+const minusoNE = () => {
+    count--
+    renderCounterApp();
+}
+
+const reset = () => {
+    count = 0;
+    renderCounterApp();
+}
+
+const rootApp = document.getElementById("app");
+
+const renderCounterApp = ()=>{
+    const templateTwo = (
+        <div>
+        <h1>Count : {count}</h1>
+        <button id = "" className="" onClick = {addOne}>+1</button>
+        <button id = "" className="" onClick = {minusoNE}>-1</button> 
+        <button id = "" className="" onClick = {reset}>reset</button>
+    
+        </div>
+    );
+    ReactDOM.render(templateTwo, rootApp);
+}
+renderCounterApp();
+```
+
+#  EVENTS AND ATTRIBURES -REACT
+```javascript
+
+let count = 0;
+const addOne = ()=>{
+    console.log("Add one");
+};
+
+const minusoNE = () => {
+    console.log("Minus one");
+}
+
+const reset = () => {
+    console.log("reset")
+}
+const templateTwo = (
+    <div>
+    <h1>Count : {count}</h1>
+    <button id = "" className="" onClick = {addOne}>+1</button>
+    <button id = "" className="" onClick = {minusoNE}>-1</button> 
+    <button id = "" className="" onClick = {reset}>reset</button>
+    </div>
+);
+
+
+const rootApp = document.getElementById("app");
+ReactDOM.render(templateTwo, rootApp)
+```
 # CONDTIOAL RENDERING
 ## 1. if statement
 ```javascript
@@ -115,6 +232,28 @@ let template2 = (
     {(user.age && user.age >= 18 )&& <p>Age: {user.age}</p>}
     </div>
 );
+```
+
+# CODE CHALENGE
+1.Only render the subtitle (and p tag) if subtitle exist - use logical && operator
+2. Render new p tag if options.lenght > 0 "Here are your options " "No options"
+```javascript
+const app = {
+    title: "My title",
+    subtitle: "My subtitle",
+    options: ["one", "two", "three"]
+}
+
+const appTemplate = (
+    <div>
+    <h1>{app.title}</h1>
+    {app.subtitle && <p>{app.title}</p> }
+    <p>{app.options.lenght > 0 ? "here are your options" : "No options"}</p>
+    </div>
+);
+
+
+
 ```
 # PASSING OBJECT TO JSX
 
