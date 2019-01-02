@@ -9,6 +9,7 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+<<<<<<< HEAD
 # MY NOTES 
 
 # 03/012019
@@ -206,6 +207,9 @@ const renderApp = ()=>{
 }
 renderApp()
 ```
+=======
+# MY NOTES  02/01/19
+>>>>>>> 583f5f6216dfc6aeeccc11943fbd3ac15eb314bc
 
 # FORM INPUT
 ```javascript
