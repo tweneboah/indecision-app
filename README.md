@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # 03/012019
 
-#CLASSES AND SUBCLASS
+# CLASSES AND SUBCLASS
 
 ```javascript
 //CLASSES
