@@ -9,11 +9,180 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-<<<<<<< HEAD
+
 # MY NOTES 
 
-
 # 03/012019
+
+
+# NESTED COMPONENT AND PROPS
+
+1. This is help component to communicate with each other
+
+2. For if you need diiferent stlye of the same component to appear on different page on the site
+
+3. When passing a data in when instantiating/calling  a component to have different style or function is call props
+
+4. You can pass strings, objects, functions, boolean to props
+
+
+```javascript
+//Nested component
+class IndecisionApp extends React.Component {
+    
+    render(){
+        const title = "Indecision";
+        const subTitle = "Put your life in the hands of a computer";
+        const option = ["Thing 1", "Thing 2", "Thing 3", "JS"]
+
+        return(
+            <div>
+              <Header title ={title} />
+              <Header subTitle = {subTitle}/>
+              <Action />
+              <Options options = {option}/>
+              <Addptions />
+            </div>
+        );
+    }
+}
+
+class Header extends React.Component {
+    render(){
+        
+        return (
+            <div>
+             <h1>{this.props.title}</h1>
+              <h2>{this.props.subTitle}</h2>
+            </div>
+        );
+    }
+}
+
+class Action extends React.Component {
+    render(){
+        return (
+            <div>
+             <button>What should I do?</button>
+           </div>
+        );
+    }
+}
+class Options extends React.Component {
+    render(){
+        return (
+            <div>
+             <Addptions />
+             {this.props.options.length}
+             <Option />
+            
+            </div>
+        );
+    }
+
+
+}
+class Option extends React.Component {
+    render(){
+        return (
+            <div>
+             <li></li>
+            </div>
+        );
+    }
+}
+
+class Addptions extends React.Component {
+render(){
+    return(
+        <div>
+          <p>Add options components here</p>
+        </div>
+    );
+}
+}
+
+
+
+ReactDOM.render(<IndecisionApp /> , document.getElementById("app"));
+```
+
+# REACT COMPONENTS
+------------------------------------------------------------------------------------------------
+1. Components require render() method
+2. The render() method require a return keyword
+3. React components are re-usable
+4. React component class name must start with an uppercase letter if not,it won't work this help to differentiate between react component and html tag
+
+```javascript
+class Header extends React.Component {
+    render(){
+        return <p>This is from a header</p>;
+    }
+}
+const jsx = (
+    <div>
+    <h1>Title</h1>
+    <Header/>
+    <Header/>
+    <Header/>
+    </div>
+);
+
+ReactDOM.render(jsx, document.getElementById("app"));
+
+
+class Header extends React.Component {
+    render(){
+        return (
+            <div>
+             <h1>Indecision</h1>
+              <h2>Put your life in the hands of a computer</h2>
+            </div>
+        );
+    }
+}
+
+class Action extends React.Component {
+    render(){
+        return (
+            <div>
+             <button>What should I do?</button>
+           </div>
+        );
+    }
+}
+class Options extends React.Component {
+    render(){
+        return (
+            <div>
+             <p>Options component here</p>
+            </div>
+        );
+    }
+}
+class Addptions extends React.Component {
+render(){
+    return(
+        <div>
+          <p>Add options components here</p>
+        </div>
+    );
+   }
+}
+
+const jsx = (
+    <div>
+        <Header />
+        <Action />
+        <Options />
+        <Addptions />
+
+    </div>
+);
+
+ReactDOM.render(jsx, document.getElementById("app"));
+```
 
 # CLASSES AND SUB-CLASS (super() Class)
 
@@ -38,8 +207,6 @@ class Person {
         return `${this.name} is ${this.age} year(s) old`;
     }
 }
-
-
 
 //Subclass - SuperClass
 //This is a sub class created based on the parent class
@@ -78,10 +245,87 @@ const other = new Students();
 console.log(other);
 
 ```
+# NESTED COMPONENT
 
+```javascript
+//Import React and react DOM libraries
+import React from "react";
+import ReactDOM from "react-dom";
 
+// COMPONENTS
+//Components require render() method
+//The render() method require a return keyword
+//React components are re-usable
+//React component class name must start with an uppercase letter if not,it won't work this help to differentiate between react component and html tag
 
+//Nested component
+class IndecisionApp extends React.Component {
+    render(){
+        return(
+            <div>
+              <Header />
+              <Action />
+              <Options />
+              <Addptions />
+            </div>
+        );
+    }
+}
 
+class Header extends React.Component {
+    render(){
+        return (
+            <div>
+             <h1>Indecision</h1>
+              <h2>Put your life in the hands of a computer</h2>
+            </div>
+        );
+    }
+}
+
+class Action extends React.Component {
+    render(){
+        return (
+            <div>
+             <button>What should I do?</button>
+           </div>
+        );
+    }
+}
+class Options extends React.Component {
+    render(){
+        return (
+            <div>
+             <Addptions />
+             <p>Options component here</p>
+             <Option />
+            </div>
+        );
+    }
+}
+
+class Option extends React.Component {
+    render(){
+        return (
+            <div>
+             Option Component Here
+            </div>
+        );
+    }
+}
+
+class Addptions extends React.Component {
+render(){
+    return(
+        <div>
+          <p>Add options components here</p>
+        </div>
+    );
+}
+}
+
+ReactDOM.render(<IndecisionApp /> , document.getElementById("app"));
+```
 # 02/01/2019
 # MAP  
 
@@ -210,7 +454,6 @@ renderApp()
 ```
 =======
 # MY NOTES  02/01/19
->>>>>>> 583f5f6216dfc6aeeccc11943fbd3ac15eb314bc
 
 # FORM INPUT
 ```javascript
