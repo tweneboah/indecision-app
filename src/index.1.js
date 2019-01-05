@@ -3,67 +3,112 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 
-const app = {
-    title: "My title",
-    subtitle: "My subtitle",
-    options: []
+class IndecisionApp extends React.Component {
+
+    render(){ 
+        const title = "Indecision";
+        const subTitle = "Put your life in the hands of a computer";
+        const option = ["Thing 1", "Thing 2", "Thing 3", "JS"]
+
+        return(
+            <div>
+              <Header title ={title} />
+              <Header subTitle = {subTitle}/>
+              <Action />
+              <Options options = {option}/>
+              <Addptions />
+            </div>
+        );
+    }
 }
 
-const onFormSubmit = (e)=>{
-e.preventDefault();
-
-//get the value user  type
-const option = e.target.elements.option.value;
-if(option){
-    app.options.push(option);
-    e.target.elements.option.value = "";
-    renderApp();
-}
-}
-
-const onRemoveAll = ()=>{
-    app.options = [];
-    renderApp();
+class Header extends React.Component {
+    render(){
+       
+        return (
+            
+            <div>
+             <h1>{this.props.title}</h1>
+              <h2>{this.props.subTitle}</h2>
+            </div>
+        );
+    }
 }
 
-const onMakeDecision = ()=>{
-    const randomNumber = Math.floor(Math.random() * app.options.length);
-
-    const option = app.options[randomNumber]
-   alert(option);
+class Action extends React.Component {
+    handlePick(){
+alert("Handle pick")
+    }
+    render(){
+       
+        return (
+            <div>
+             <button onClick = {this.handlePick}>What should I do?</button>
+           </div>
+        );
+    }
 }
-const rootApp = document.getElementById("app");
 
-//ARRAY
-const renderApp = ()=>{
-    const template = (
-        <div>
-        <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.title}</p> }
-        <p>{app.options.length > 0 ? "here are your options" : "No options"}</p>
-        <p>{app.options.length}</p>
-        <button onClick ={onRemoveAll}>Remove All</button>
-        <button disabled = {app.options.length === 0} onClick ={onMakeDecision}>What Should I do?</button>
-        <ol>
+
+//Remove all buttons
+class Options extends React.Component {
+
+constructor(props){
+super(props);
+this.handleRemoveAll = this.handleRemoveAll.bind(this);
+}
+
+    handleRemoveAll(){
+     console.log(this.props.options)
+    }
+    
+    render(){
+        console.log(this.props)
+        return (
+            <div>
             {
-                app.options.map((option)=>{
-                return  <li key ={option}>{option}</li>  
-                })
+                this.props.options.map((option) => <Option key = {option} optionText = {option} />)
             }
-       </ol>
-    <form onSubmit = {onFormSubmit}>
-    <input type ="text" name = "option"/>
-    <button>Add option</button>
-    </form>
+            <button onClick = {this.handleRemoveAll}>Remove All</button>
+            </div>
+        );
+    }
+
+
+}
+
+
+class Option extends React.Component {
+    render(){
+        return (
+            <div>
+             {this.props.optionText}
+            </div>
+        );
+    }
+}
+
+
+
+class Addptions extends React.Component {
+
+handleAddOption(e){
+    e.preventDefault();
+    const option = e.target.elements.option.value.trim();
+    if(option){
+        alert(option);
+    }
+}
+render(){
+    return(
+        <div>
+         <form onSubmit = {this.handleAddOption}>
+             <input type = "text" name ="option"/>
+             <button>Add Option</button>
+         </form>
         </div>
     );
-    ReactDOM.render(template, rootApp);
 }
-renderApp()
+}
 
-
-
-
-//MAP
-//Map is use to create exact copy of an array where we can manipulate the newly created array
-
+ReactDOM.render(<IndecisionApp /> , document.getElementById("app"));

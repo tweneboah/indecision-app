@@ -12,9 +12,187 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # MY NOTES 
 
+# 05/01/2019
+
+# STATE COMPONENT
+1. This is where a data is render and re-render on the fly without manually changing
+
+## HOW STATE COMPONENT WORKS / HOW TO CONSTRUCT STATE COMPONENT 
+
+1. Setup default state object
+
+2. Component rendered with default State Values
+
+3. Change State base on event
+
+4. Component re-rendered using the new State Value
+
+5. Start again at step 3
+
+## CODE DEMO
+```javascript
+//Component State
+class Counter extends React.Component{
+    //Binding these functions
+    constructor(props) {
+        super(props);
+        this.handleAddOne = this.handleAddOne.bind(this);
+        this.handleMinuesOne = this.handleMinuesOne.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+        this.state = {
+            count: 0
+        }
+    }
+    handleAddOne (){
+        this.setState((prevState) =>{
+            return {
+                count: prevState.count + 1
+            }
+        })
+    }
+    
+    handleMinuesOne() {
+      this.setState((prevState) =>{
+          return {
+              count: prevState.count -1
+          }
+      })
+    }
+    
+    handleReset(){
+        this.setState((prevState) =>{
+            return {
+                count: prevState.count = 0
+            }
+        })
+    }
+    render(){
+        return(
+            <div>
+              <h1>Count: {this.state.count} </h1>
+              <button onClick = {this.handleAddOne}>+1</button>
+              <button onClick = {this.handleMinuesOne}>-1</button>
+              <button onClick = {this.handleReset}>Reset</button>
+            </div>
+        );
+    }
+}
+//METHODS
+
+
+ReactDOM.render(<Counter />, document.getElementById("app"));
+
+```
+
+# METHOD BINDING IN REACT
+
+1. Our Option class has two method calls, render() and handleRemoveAll()
+
+2. For the handleRemoveAll() render() method the binding was grasp that was why we were able to access 'this.props.options' but we have broken the handleRemoveAll() bind itself. This means that you cannot access the data of the option array.
+
+3. For our Options class we have two functions that we want to work on our array thus render() and handleRemoveAll() to work on the array (options). In this case there is no connection between the two functions do to be able to use the function unless we bind it.
+
+4. Another way binding we can loose is when assign a new variable to object function.
+
+# HOW TO FIXED BINDING
+
+## 1. Inline
+1. For this unless you bind handleRemoveAll() anytime you the function
+
+# CODE DEMO
+
+```javascript
+
+  <button onClick = {this.handleRemoveAll.bind(this)}>Remove All</button>
+            </div>
+class Options extends React.Component {
+
+    handleRemoveAll(){
+     console.log(this.props.options)
+    }
+    
+    render(){
+
+        return (
+            <div>
+            {
+                this.props.options.map((option) => <Option key = {option} optionText = {option} />)
+            }
+            <button onClick = {this.handleRemoveAll.bind(this)}>Remove All</button>
+            </div>
+        );
+    }
+
+
+}
+
+```
+
+## 2. Using a constructor
+
+## CODE DEMO
+```javascript
+class Options extends React.Component {
+
+constructor(props){
+super(props);
+this.handleRemoveAll = this.handleRemoveAll.bind(this);
+}
+
+    handleRemoveAll(){
+     console.log(this.props.options)
+    }
+    
+    render(){
+        console.log(this.props)
+        return (
+            <div>
+            {
+                this.props.options.map((option) => <Option key = {option} optionText = {option} />)
+            }
+            <button onClick = {this.handleRemoveAll}>Remove All</button>
+            </div>
+        );
+    }
+
+
+}
+```
+# ANOTHER EXAMPLE
+```javascript
+class Counter extends React.Component{
+    //Binding these functions
+    constructor(props) {
+        super(props);
+        this.handleAddOne = this.handleAddOne.bind(this);
+        this.handleMinuesOne = this.handleMinuesOne.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+    }
+    handleAddOne (){
+        console.log("Add one");
+    }
+    
+    handleMinuesOne() {
+        console.log("Minus one");
+    }
+    
+    handleReset(){
+        console.log("Reset")
+    }
+    render(){
+        return(
+            <div>
+              <h1>Count: </h1>
+              <button onClick = {this.handleAddOne}>+1</button>
+              <button onClick = {this.handleMinuesOne}>-1</button>
+              <button onClick = {this.handleReset}>Reset</button>
+            </div>
+        );
+    }
+}
+```
+
 # 03/012019
-
-
 # NESTED COMPONENT AND PROPS
 
 1. This is help component to communicate with each other
@@ -25,6 +203,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 4. You can pass strings, objects, functions, boolean to props
 
+5. Anytime you pass array to JSX you have to use "key = {someting}"
 
 ```javascript
 //Nested component
@@ -461,7 +640,10 @@ renderApp()
 const app = {
     title: "My title",
     subtitle: "My subtitle",
-    options: []
+    options: [],
+    getInfo(){
+        console.log(this.title)
+    }
 }
 
 const onFormSubmit = (e)=>{
